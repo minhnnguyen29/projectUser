@@ -13,8 +13,12 @@ public class WebSecurityConfig
     @Bean
     //disable CSRF with SecurityFilterChain to allow POST requests
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception 
-    {    
-        http.csrf(csrf -> csrf.disable());
+    {
+        http.authorizeHttpRequests()
+                .anyRequest()
+                .permitAll()//allowing unrestricted access to all endpoints
+                .and()
+                .csrf( csrf -> csrf.disable()); 
         return http.build();
     }
 
