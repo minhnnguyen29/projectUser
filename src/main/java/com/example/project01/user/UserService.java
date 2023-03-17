@@ -44,7 +44,7 @@ public class UserService {
         userRepository.save(newUser); 
     }
 
-    //
+    //Apply @Transactional at Service Level with @Modifying @Query to update info
     @Transactional
     public void updateUserDetails(Long id, String password){
 
@@ -60,6 +60,21 @@ public class UserService {
                 userRepository.updatePassword(id, password);
             }
 
+    }
+
+    public void deleteUserAccount(Long id)
+    {
+        //retrieve candidate with ID below 
+        boolean userExists = userRepository.existsById(id); 
+        if (!userExists){
+            throw new IllegalStateException(
+                "User with id " + id + " doesn't exist. Can not be deleted."
+            );
+        }
+
+        //delete 
+        userRepository.deleteById(id);
+        
     }
     
 }
