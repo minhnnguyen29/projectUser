@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController //indicates that class acts as API layer that interacts with Service layer & the web  using API calls 
@@ -38,5 +39,10 @@ public class UserController {
         return userService.findAllUsers(); 
     }
 
+    @GetMapping(path = "/{id}")
+    public User showThisUser(@PathVariable("id") Long id)
+    {
+        return userService.findThisUser(id); 
+    }
 
 }

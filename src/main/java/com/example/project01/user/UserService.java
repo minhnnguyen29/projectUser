@@ -23,6 +23,15 @@ public class UserService {
         return userRepository.findAll(); 
     }
 
+    public User findThisUser(Long id)
+    {
+        User thisUser = userRepository.findById(id)
+        .orElseThrow( () -> new IllegalStateException(
+            "User with id " + id + " doesn't exist."
+        ));
+        return thisUser;
+    }
+
     public void addNewUser(User newUser)
     {
         //check if username is taken before allowing to save into database

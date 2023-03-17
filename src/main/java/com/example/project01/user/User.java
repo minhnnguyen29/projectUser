@@ -39,7 +39,7 @@ public class User {
     private String username; 
 
     @Column( //column password is NOT NULL & has type: varchar(255)
-        name = "passsword", 
+        name = "password", 
         nullable = false, 
         columnDefinition = "varchar(255)"
     )
@@ -53,6 +53,12 @@ public class User {
     private boolean loggedIn; 
 
     //not creating default contructor as all user object needs to be created with username & password 
+    
+    public User()
+    {
+
+    }
+
     public User(String username, String password) 
     {
         this.username = username; 
