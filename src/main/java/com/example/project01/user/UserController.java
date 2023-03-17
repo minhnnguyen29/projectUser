@@ -5,10 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController //indicates that class acts as API layer that interacts with Service layer & the web  using API calls 
 @RequestMapping(path = "/api/v1/users") //the path will start with  
@@ -24,6 +27,7 @@ public class UserController {
     }
     
     //============================================END POINTS===================================================
+    //POST
     @PostMapping(path = "/register") //MAP a POST request to add a new user 
     public void register(@RequestBody User newUser)
     {
@@ -33,6 +37,8 @@ public class UserController {
         }
     }
 
+
+    //GET 
     @GetMapping(path = "/all")
     public List<User> showUsers()
     {
@@ -43,6 +49,14 @@ public class UserController {
     public User showThisUser(@PathVariable("id") Long id)
     {
         return userService.findThisUser(id); 
+    }
+
+    //PUT 
+    @PutMapping(path = "/update/{id}")
+    public void updateUser(@PathVariable("id") Long id, 
+                            @RequestParam(required = false) String password) 
+    {
+        userService.updateUserDetails(id, password);    
     }
 
 }

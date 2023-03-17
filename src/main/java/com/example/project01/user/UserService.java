@@ -3,6 +3,8 @@ package com.example.project01.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -35,13 +37,29 @@ public class UserService {
     public void addNewUser(User newUser)
     {
         //check if username is taken before allowing to save into database
-        Optional<User> userByUsername = userRepository.findByUsername(newUser.getUsername());
-        if(userByUsername.isPresent()) {
+        Optional<User> userWithId = userRepository.findById(newUser.getId());
+        if(userWithId.isPresent()) {
             throw new IllegalStateException("The chosen username is taken. Please provide new username:");
         }
-        System.out.println(userByUsername.toString());
         userRepository.save(newUser); 
     }
 
+    //
+    @Transactional
+    public void updateUserDetails(Long id, String password){
+
+        //retrieve candidate with ID below 
+        User userWithId = userRepository.findById(id)
+            .orElseThrow( () -> new IllegalStateException(
+                "User with id " + id + " doesn't exist. Can not be modified."
+            ));
+
+        //if user exists, update details 
+        if(password != null && password.length() > 0 &&
+            !userWithId.getPassword().equals(password)){
+                userRepository.updatePassword(id, password);
+            }
+
+    }
     
 }
