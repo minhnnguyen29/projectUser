@@ -31,7 +31,7 @@ public class User {
     
     
     @Column( //column userName is NOT NULL, unique & has type: varchar(255)
-        name = "userName", 
+        name = "username", 
         nullable = false, 
         unique = true, 
         columnDefinition = "varchar(255)" 
