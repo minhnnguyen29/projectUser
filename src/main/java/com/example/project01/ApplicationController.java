@@ -6,15 +6,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
+
 @Controller
 public class ApplicationController {
     @Value("${spring.application.name}")
-    String appName; 
+    String appName;
+
 
     @GetMapping(value="/")
     public String homePage(Model model){
         model.addAttribute("appName", appName); 
         return "index";
     }
-    
+
+    @GetMapping(value="/all2")
+    public String showAllPage(Model model){      
+        return "all"; 
+    }
 }

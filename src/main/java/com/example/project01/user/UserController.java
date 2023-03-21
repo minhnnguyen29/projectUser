@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.type.internal.UserTypeJavaTypeWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,15 +21,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping(path = "/api/v1/users") //the path will start with  
 public class UserController {
 
-    private final UserService userService; //create a reference to service layer 
-
-    //dependency injection: userService is being injected in UserController's constructor 
     @Autowired 
-    public UserController(UserService userService)
-    {
-        this.userService = userService; //userService is instantiated with @Autowired
-    }
-    
+    private UserService userService; //create a reference to service layer 
+
     //============================================END POINTS===================================================
     //POST
     @PostMapping(path = "/register") //MAP a POST request to add a new user 
@@ -41,9 +37,11 @@ public class UserController {
 
 
     //GET 
-    @GetMapping(path = "/all")
-    public List<User> showUsers()
-    {
+    @GetMapping(value = "/all")
+    public List<User> showUsers(Model model)
+    {   
+        //bind attr 'allUsers' with value of all users
+        model.addAttribute("allUsers", userService.findAllUsers());
         return userService.findAllUsers(); 
     }
 
