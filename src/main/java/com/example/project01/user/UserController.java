@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 
-@RestController //indicates that class acts as API layer that interacts with Service layer & the web  using API calls 
-@RequestMapping(path = "/api/v1/users") //the path will start with  
+@Controller //indicates that class acts as API layer that interacts with Service layer & the web  using API calls 
 public class UserController {
 
     @Autowired 
@@ -38,11 +37,11 @@ public class UserController {
 
     //GET 
     @GetMapping(value = "/all")
-    public List<User> showUsers(Model model)
+    public String showUsers(Model model)
     {   
         //bind attr 'allUsers' with value of all users
         model.addAttribute("allUsers", userService.findAllUsers());
-        return userService.findAllUsers(); 
+        return "all"; 
     }
 
     @GetMapping(path = "/{id}")
