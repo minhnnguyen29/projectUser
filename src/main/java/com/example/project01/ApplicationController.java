@@ -19,8 +19,4 @@ public class ApplicationController {
         return "index";
     }
 
-    @GetMapping(value="/all2")
-    public String showAllPage(Model model){      
-        return "all"; 
-    }
 }

@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>User Management System</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
@@ -30,8 +30,7 @@
                     <td th:text="${user.id}"></td>
                     <td th:text="${user.username}"></td>
                     <td>
-                        <span th:if="${user.loggedIn} == 0" th:text="Yes" />
-                        <span th:unless="${user.loggedIn == 1" th:text="No" /> 
+                        <span th:text="${user.status} ? 'Yes' : 'No'" />
                     </td>
                 </tr>
             </tbody>
