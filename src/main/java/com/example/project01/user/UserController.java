@@ -52,9 +52,10 @@ public class UserController {
     }
 
     @GetMapping(path = "/{id}")
-    public User showThisUser(@PathVariable("id") Long id)
+    public String showThisUser(Model model, @PathVariable("id") Long id)
     {
-        return userService.findThisUser(id); 
+        model.addAttribute("currentUser", userService.findThisUser(id));
+        return "user"; //return user template to show 
     }
 
     // ========================= UPDATE ===================================     
