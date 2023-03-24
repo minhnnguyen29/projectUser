@@ -36,7 +36,8 @@ public class UserController {
         if(result.hasErrors()) { //if newUser is not valid (BindingResult unsuccessful)
             return "signupForm"; //show signupForm again 
         }
-        return "redirect:/home";//returns template 'register' that allows user to sign up 
+        userService.addNewUser(newUser);
+        return "redirect:/";//returns template 'register' that allows user to sign up 
     }
 
 
