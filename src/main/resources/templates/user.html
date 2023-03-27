@@ -27,13 +27,13 @@
     </ul>
 
 
-    <section>
+    <section class="vh-100">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-lg-6 mb-4 mb-lg-0">
                     <div class="card mb-3" style="border-radius: .5rem;">
                         <div class="row g-0">
-                            <div class="col md-4 text-center bg-dark text-light" 
+                            <div class="col-md-4 text-center bg-dark text-light" 
                                 style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
                                 <h5 th:text="${currentUser.username}"></h5>
                                 <p th:text="${currentUser.status} ? 'Yes' : 'No'"></p>
