@@ -59,11 +59,13 @@ public class UserController {
     }
 
     // ========================= UPDATE ===================================     
-    @PutMapping(path = "/update/{id}")
-    public void updateUser(@PathVariable("id") Long id, 
-                            @RequestParam(required = false) String password) 
+    @GetMapping(path = "/update/{id}")
+    public String updateUser(@PathVariable("id") Long id, 
+                            @RequestParam(required = false) String password, Model model) 
     {
+        model.addAttribute("chosenUser", id);
         userService.updateUserDetails(id, password);    
+        return "redirect:/all";
     }
 
     // ======================== DELETE ==================================== 
