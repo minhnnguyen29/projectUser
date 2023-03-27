@@ -67,10 +67,12 @@ public class UserController {
     }
 
     // ======================== DELETE ==================================== 
-    @DeleteMapping(path = "/delete/{id}")
-    public void deleteUser(@PathVariable("id") Long id)
+    @GetMapping(path = "/delete/{id}")
+    public String deleteUser(Model model, @PathVariable("id") Long id)
     {
-        userService.deleteUserAccount(id);   
+        model.addAttribute("chosenUser", id);
+        userService.deleteUserAccount(id);  
+        return "redirect:/all";  
     }
 
 }

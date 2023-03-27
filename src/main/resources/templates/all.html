@@ -17,12 +17,13 @@
         <div class="container my-3">
         <h2>User List</h2>
 
-        <table border="0" class="table table-striped table-responsive-md">
+        <table border="0" class="table table-striped table-responsive-sm text-center">
             <thead>
                 <tr>
                     <th>User ID</th>
                     <th>Username</th>
                     <th>Status</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +32,10 @@
                     <td th:text="${user.username}"></td>
                     <td>
                         <span th:text="${user.status} ? 'Yes' : 'No'" />
+                    </td>
+                    <td class="d-md-flex justify-content-around align-items-center">
+                        <button type="button" class="btn btn-secondary">Modify</button>
+                        <a th:href="@{/delete/{id}(id=${user.id})}" type="button" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             </tbody>
