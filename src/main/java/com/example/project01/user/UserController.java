@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -60,12 +61,24 @@ public class UserController {
 
     // ========================= UPDATE ===================================     
     @GetMapping(path = "/update/{id}")
-    public String updateUser(@PathVariable("id") Long id, 
-                            @RequestParam(required = false) String password, Model model) 
+    public String showUpdateForm(@PathVariable("id") Long id, 
+                             Model model) 
     {
-        model.addAttribute("chosenUser", id);
-        userService.updateUserDetails(id, password);    
-        return "redirect:/all";
+        //find user to update 
+        User currentUser = userService.findThisUser(id); 
+
+        //bind this user as model attribute to return user 
+        model.addAttribute("currentUser", currentUser);
+        return "update";
+    }
+
+    @PostMapping(path = "updateUser")
+    public String updateUser(@ModelAttribute("currentUser") User currentUser)
+    {
+        //save this data to db 
+        System.out.println(currentUser.toString());
+        userService.updateUserDetails(currentUser);
+        return "redirect:/";
     }
 
     // ======================== DELETE ==================================== 

@@ -40,19 +40,13 @@ public class UserService {
 
     //Apply @Transactional at Service Level with @Modifying @Query to update info
     @Transactional
-    public void updateUserDetails(Long id, String password){
+    public void updateUserDetails(User user){
 
         //retrieve candidate with ID below 
-        User userWithId = userRepository.findById(id)
-            .orElseThrow( () -> new IllegalStateException(
-                "User with id " + id + " doesn't exist. Can not be modified."
-            ));
+        if ( userRepository.existsById(user.getId()) ){
+            userRepository.save(user);
+        }
 
-        //if user exists, update details 
-        if(password != null && password.length() > 0 &&
-            !userWithId.getPassword().equals(password)){
-                userRepository.updatePassword(id, password);
-            }
 
     }
 
