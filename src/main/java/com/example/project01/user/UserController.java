@@ -65,18 +65,22 @@ public class UserController {
                              Model model) 
     {
         //find user to update 
-        User currentUser = userService.findThisUser(id); 
-
+        User currentUser = userService.findThisUser(id);
+        
         //bind this user as model attribute to return user 
         model.addAttribute("currentUser", currentUser);
         return "update";
     }
 
-    @PostMapping(path = "updateUser")
-    public String updateUser(@ModelAttribute("currentUser") User currentUser)
+    @PostMapping(path = "updating/{id}")
+    public String updateUser(@PathVariable("id") Long id, @ModelAttribute("currentUser") User currentUser, BindingResult result, Model model)
     {
+        if(result.hasErrors()) {
+            currentUser.setId(id);
+            return "update";
+        }
+
         //save this data to db 
-        System.out.println(currentUser.toString());
         userService.updateUserDetails(currentUser);
         return "redirect:/";
     }

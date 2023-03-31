@@ -26,14 +26,14 @@
 
     <!-- Form to update user info -->
     <div class="container rounded bg-white m-5">
-        <form action="#" th:action="@{/updateUser}" th:object="${currentUser}" method="post">
+        <form action="#" th:action="@{/updating/{id} (id=${currentUser.id})}" th:object="${currentUser}" method="post">
             
             <!-- hidden id but required to update -->
 
-            <input type="text" th:field="*{id}" class="form-control col-4" />
             <input type="text" th:field="*{username}" class="form-control col-4" id="usernameInput" aria-describedby="emailHelp" placeholder="Enter email">
 
             <input type="text" th:field="*{password}" class="form-control col-4" id="passwordInput" placeholder="Password">
+            <input type="text" th:field="*{id}" />
             <button type="submit" class="btn btn-info">Update</button>
         </form>
     </div>    

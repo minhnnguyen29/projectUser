@@ -14,15 +14,16 @@ import jakarta.persistence.GenerationType;
 public class User {
     
     @Id
-    @SequenceGenerator (//create a sequence for ID so that its auto-incremented by 1 each 
-        name = "user_sequence", 
-        sequenceName = "user_sequence", 
-        allocationSize = 1
-    )
-    @GeneratedValue (
-        strategy = GenerationType.SEQUENCE,
-        generator = "user_sequence"    
-    )
+    // @SequenceGenerator (//create a sequence for ID so that its auto-incremented by 1 each 
+    //     name = "user_sequence", 
+    //     sequenceName = "user_sequence", 
+    //     allocationSize = 1
+    // )
+    // @GeneratedValue (
+    //     strategy = GenerationType.SEQUENCE,
+    //     generator = "user_sequence"    
+    // )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(//@Column is used to mention the details of each column/variable 
         name = "id", //name of the column 
         updatable = false 
@@ -70,6 +71,11 @@ public class User {
     public Long getId() 
     {
         return id; 
+    }
+
+    public void setId(Long id)
+    {
+        this.id = id;
     }
 
     public void setUsername(String username)
