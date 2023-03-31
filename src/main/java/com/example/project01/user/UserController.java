@@ -52,6 +52,12 @@ public class UserController {
         return "all";//returns template 'all' that display the table listing all users 
     }
 
+    @GetMapping(value = "/login")
+    public String login(Model model) 
+    {
+        return "login";
+    }
+
     @GetMapping(path = "/{id}")
     public String showThisUser(Model model, @PathVariable("id") Long id)
     {
